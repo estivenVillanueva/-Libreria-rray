@@ -373,6 +373,26 @@ function agregarLibro(libro) {
     };
 });
 
+
+
+const iteracionesTitulos = libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      Iteracion1: `${libro.titulo} (Edición especial)`,
+      Iteracion2: `${libro.titulo} (Edición de lujo)`,
+      Iteracion3: `${libro.titulo} (Edición anotada)`,
+      Iteracion4: `${libro.titulo} (Edición de bolsillo)`,
+      Iteracion5: `${libro.titulo} (Edición ilustrada)`,
+      Iteracion6: `${libro.titulo} (Edición conmemorativa)`,
+      Iteracion7: `${libro.titulo} (Edición revisada)`,
+      Iteracion8: `${libro.titulo} (Edición ampliada)`,
+      Iteracion9: `${libro.titulo} (Edición de coleccionista)`,
+      Iteracion10: `${libro.titulo} (Edición de autor)`
+  };
+});
+
+console.log(iteracionesTitulos);
+
 const librosConDescuento = libros.map(libro => {
   const descuento = libro.precio.slice(1) * 0.2;
   const precioDescuento = libro.precio.slice(1) * 0.8; 
@@ -399,40 +419,46 @@ function listarLibros() {
   });
 }
 
-const iteracionesTitulos = libros.map(libro => {
-  return {
-      Titulo: libro.titulo,
-      Iteracion1: `${libro.titulo} (Edición especial)`,
-      Iteracion2: `${libro.titulo} (Edición de lujo)`,
-      Iteracion3: `${libro.titulo} (Edición anotada)`,
-      Iteracion4: `${libro.titulo} (Edición de bolsillo)`,
-      Iteracion5: `${libro.titulo} (Edición ilustrada)`,
-      Iteracion6: `${libro.titulo} (Edición conmemorativa)`,
-      Iteracion7: `${libro.titulo} (Edición revisada)`,
-      Iteracion8: `${libro.titulo} (Edición ampliada)`,
-      Iteracion9: `${libro.titulo} (Edición de coleccionista)`,
-      Iteracion10: `${libro.titulo} (Edición de autor)`
-  };
-});
+function librosMayorA50() {
+  const librosMayores = librosConDescuento.filter(libro => {
+    const precio = parseFloat(libro.precio.slice(1));
+    return precio > 50;
+  });
 
-console.log(iteracionesTitulos);
+  console.log("Libros con precio mayor a $50:");
+  librosMayores.forEach(libro => {
+    console.log(`- ${libro.titulo} (${libro.precio})`);
+  });
+}
 
-     
+function resumenMasPaginas() {
+  const libroMasPaginas = librosConDescuento.reduce((acumulador, libro) => {
+    return libro.numPaginas > acumulador.numPaginas ? libro : acumulador;
+  });
+
+  console.log("Resumen del libro con más páginas:");
+  console.log(`Título: ${libroMasPaginas.titulo}`);
+  console.log(`Autor: ${libroMasPaginas.autor}`);
+  console.log(`Editorial: ${libroMasPaginas.editorial}`);
+  console.log(`Páginas: ${libroMasPaginas.numPaginas}`);
+}
     function mostrarMenu() {
     console.log("/nMenú de la pila de libros:");
     console.log("1. Agregar un libro");
     console.log("2. Quitar un libro");
     console.log("3. Mostrar la pila");
     console.log("4. Listar libros");
-    console.log("5. Salir");
+    console.log("5. Libros mayores a $50");
+    console.log("6. Resumen de libro con más páginas");
+    console.log("7. Salir");
    }
 
     function iniciarPila() {
     let opcion = 0;
   
-    while (opcion !== 4) {
+    while (opcion !== 7) {
       mostrarMenu();
-      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro,2.Quitar libro,3.Mostrar la pila,4. Listar libros,5.salir : "));
+      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro,2.Quitar libro,3.Mostrar la pila,4. Listar libros,5. Libros mayores a $50,6. Resumen de libro con más páginas,7. Salir "));
   
       switch (opcion) {
         case 1:
@@ -451,11 +477,17 @@ console.log(iteracionesTitulos);
           case 4:
             listarLibros();
             break;
-        case 5:
-            console.log("¡Hasta luego!");
-            break;
-        default:
-            console.log("Opción inválida. Intente nuevamente.");
+            case 5:
+              librosMayorA50();
+              break;
+            case 6:
+              resumenMasPaginas();
+              break;
+            case 7:
+              console.log("¡Hasta luego!");
+              break;
+            default:
+              console.log("Opción inválida. Intente nuevamente.");
       }
     }
   }
