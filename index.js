@@ -373,7 +373,31 @@ function agregarLibro(libro) {
     };
 });
 
-console.log(librosListados);
+const librosConDescuento = libros.map(libro => {
+  const descuento = libro.precio.slice(1) * 0.2;
+  const precioDescuento = libro.precio.slice(1) * 0.8; 
+  return {
+    ...libro,
+    descuento: `$${descuento.toFixed(2)}`,
+    precioDescuento: `$${precioDescuento.toFixed(2)}`
+  };
+});
+
+console.log(librosConDescuento);
+
+function listarLibros() {
+  console.log("Listado de libros:");
+  librosConDescuento.forEach(libro => {
+    console.log(`
+      Título: ${libro.titulo}
+      Autor: ${libro.autor}
+      Editorial: ${libro.editorial}
+      Precio original: ${libro.precio}
+      Descuento: ${libro.descuento}
+      Precio con descuento: ${libro.precioDescuento}
+    `);
+  });
+}
 
 const iteracionesTitulos = libros.map(libro => {
   return {
@@ -435,16 +459,5 @@ console.log(iteracionesTitulos);
       }
     }
   }
-  function listarLibros() {
-    const librosListados = libros.map(libro => {
-        return {
-            Titulo: libro.titulo,
-            Autor: libro.autor,
-            Editorial: libro.editorial,
-            Precio: libro.precio
-        };
-    });
-  }
-    console.log("Listado de libros:");
 
   iniciarPila()
