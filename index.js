@@ -442,6 +442,17 @@ function resumenMasPaginas() {
   console.log(`Editorial: ${libroMasPaginas.editorial}`);
   console.log(`Páginas: ${libroMasPaginas.numPaginas}`);
 }
+
+function ordenarPorPaginas() {
+  const librosOrdenados = librosConDescuento.slice().sort((a, b) => b.numPaginas - a.numPaginas);
+
+  console.log("Libros ordenados por número de páginas (de mayor a menor):");
+  librosOrdenados.forEach(libro => {
+    console.log(`- ${libro.titulo} (${libro.numPaginas} páginas)`);
+  });
+}
+
+
     function mostrarMenu() {
     console.log("/nMenú de la pila de libros:");
     console.log("1. Agregar un libro");
@@ -450,7 +461,8 @@ function resumenMasPaginas() {
     console.log("4. Listar libros");
     console.log("5. Libros mayores a $50");
     console.log("6. Resumen de libro con más páginas");
-    console.log("7. Salir");
+    console.log("7. Ordenar libros por número de páginas");
+    console.log("8. Salir");
    }
 
     function iniciarPila() {
@@ -458,7 +470,7 @@ function resumenMasPaginas() {
   
     while (opcion !== 7) {
       mostrarMenu();
-      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro,2.Quitar libro,3.Mostrar la pila,4. Listar libros,5. Libros mayores a $50,6. Resumen de libro con más páginas,7. Salir "));
+      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro,2.Quitar libro,3.Mostrar la pila,4. Listar libros,5. Libros mayores a $50,6. Resumen de libro con más páginas,8.ordenar por paginas,7. Salir "));
   
       switch (opcion) {
         case 1:
@@ -466,7 +478,7 @@ function resumenMasPaginas() {
             titulo: prompt("ingrese el titulo del libro"),
 
           };
-          agregarLibro(nuevoLibro);
+        agregarLibro(nuevoLibro);
           break;
         case 2:
           quitarLibro();
@@ -474,20 +486,23 @@ function resumenMasPaginas() {
         case 3:
           mostrarPila();
           break;
-          case 4:
+        case 4:
             listarLibros();
-            break;
-            case 5:
-              librosMayorA50();
-              break;
-            case 6:
-              resumenMasPaginas();
-              break;
-            case 7:
-              console.log("¡Hasta luego!");
-              break;
-            default:
-              console.log("Opción inválida. Intente nuevamente.");
+          break;
+        case 5:
+            librosMayorA50();
+          break;
+        case 6:
+            resumenMasPaginas();
+          break;
+        case 7:
+            ordenarPorPaginas();
+          break;
+        case 8:
+            console.log("¡Hasta luego!");
+          break;
+          default:
+            console.log("Opción inválida. Intente nuevamente.");
       }
     }
   }
