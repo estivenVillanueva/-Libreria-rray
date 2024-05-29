@@ -364,6 +364,34 @@ function agregarLibro(libro) {
     }
   }
   
+  const librosListados = libros.map(libro => {
+    return {
+        Titulo: libro.titulo,
+        Autor: libro.autor,
+        Editorial: libro.editorial,
+        Precio: libro.precio
+    };
+});
+
+console.log(librosListados);
+
+const iteracionesTitulos = libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      Iteracion1: `${libro.titulo} (Edición especial)`,
+      Iteracion2: `${libro.titulo} (Edición de lujo)`,
+      Iteracion3: `${libro.titulo} (Edición anotada)`,
+      Iteracion4: `${libro.titulo} (Edición de bolsillo)`,
+      Iteracion5: `${libro.titulo} (Edición ilustrada)`,
+      Iteracion6: `${libro.titulo} (Edición conmemorativa)`,
+      Iteracion7: `${libro.titulo} (Edición revisada)`,
+      Iteracion8: `${libro.titulo} (Edición ampliada)`,
+      Iteracion9: `${libro.titulo} (Edición de coleccionista)`,
+      Iteracion10: `${libro.titulo} (Edición de autor)`
+  };
+});
+
+console.log(iteracionesTitulos);
 
      
     function mostrarMenu() {
@@ -371,7 +399,8 @@ function agregarLibro(libro) {
     console.log("1. Agregar un libro");
     console.log("2. Quitar un libro");
     console.log("3. Mostrar la pila");
-    console.log("4. Salir");
+    console.log("4. Listar libros");
+    console.log("5. Salir");
    }
 
     function iniciarPila() {
@@ -379,7 +408,7 @@ function agregarLibro(libro) {
   
     while (opcion !== 4) {
       mostrarMenu();
-      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro,2.Quitar libro,3.Mostrar la pila,4.salir : "));
+      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro,2.Quitar libro,3.Mostrar la pila,4. Listar libros,5.salir : "));
   
       switch (opcion) {
         case 1:
@@ -395,13 +424,27 @@ function agregarLibro(libro) {
         case 3:
           mostrarPila();
           break;
-        case 4:
-          console.log("¡Hasta luego!");
-          break;
+          case 4:
+            listarLibros();
+            break;
+        case 5:
+            console.log("¡Hasta luego!");
+            break;
         default:
-          console.log("Opción inválida. Intente nuevamente.");
+            console.log("Opción inválida. Intente nuevamente.");
       }
     }
   }
-  
+  function listarLibros() {
+    const librosListados = libros.map(libro => {
+        return {
+            Titulo: libro.titulo,
+            Autor: libro.autor,
+            Editorial: libro.editorial,
+            Precio: libro.precio
+        };
+    });
+  }
+    console.log("Listado de libros:");
+
   iniciarPila()
