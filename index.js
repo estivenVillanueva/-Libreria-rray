@@ -452,6 +452,70 @@ function ordenarPorPaginas() {
   });
 }
 
+function librosCaro() {
+  const librosCaro = librosConDescuento
+    .filter(libro => parseFloat(libro.precio.slice(1)) > 50)
+    .map(libro => ({
+      Titulo: libro.titulo,
+      Autor: libro.autor,
+      Precio: libro.precio
+    }));
+
+  console.log("Resumen de libros caros (precio mayor a $50):");
+  librosCaro.forEach(libro => {
+    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
+  });
+}
+
+function librosMenosPaginas() {
+  const librosMenosPaginas = librosConDescuento
+    .filter(libro => libro.numPaginas < 100)
+    .map(libro => ({
+      Titulo: libro.titulo,
+      Autor: libro.autor,
+      Editorial: libro.editorial,
+      Paginas: libro.numPaginas
+    }));
+
+  console.log("Resumen de libros con menos de 100 páginas:");
+  librosMenosPaginas.forEach(libro => {
+    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Editorial: ${libro.Editorial}, Páginas: ${libro.Paginas}`);
+  });
+}
+
+function librosCaro2() {
+  const librosCaro2 = librosConDescuento
+    .filter(libro => parseFloat(libro.precio.slice(1)) > 20)
+    .sort((a, b) => parseFloat(b.precio.slice(1)) - parseFloat(a.precio.slice(1)))
+    .map(libro => ({
+      Titulo: libro.titulo,
+      Autor: libro.autor,
+      Precio: libro.precio
+    }));
+
+  console.log("Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio:");
+  librosCaro2.forEach(libro => {
+    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
+  });
+}
+
+function resumenMasPaginas() {
+  const librosMasPaginas = librosConDescuento
+    .slice()
+    .sort((a, b) => b.numPaginas - a.numPaginas)
+    .map(libro => ({
+      Titulo: libro.titulo,
+      Autor: libro.autor,
+      Editorial: libro.editorial,
+      Paginas: libro.numPaginas
+    }));
+
+  console.log("Resumen de libros ordenados por número de páginas (de mayor a menor):");
+  librosMasPaginas.forEach(libro => {
+    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Editorial: ${libro.Editorial}, Páginas: ${libro.Paginas}`);
+  });
+}
+
 
     function mostrarMenu() {
     console.log("/nMenú de la pila de libros:");
@@ -462,15 +526,19 @@ function ordenarPorPaginas() {
     console.log("5. Libros mayores a $50");
     console.log("6. Resumen de libro con más páginas");
     console.log("7. Ordenar libros por número de páginas");
-    console.log("8. Salir");
+    console.log("8. Resumen de libros caros (precio mayor a $50)");
+    console.log("9. Resumen de libros con menos de 100 páginas");
+    console.log("10. Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio");
+    console.log("11. Resumen de libros ordenados por número de páginas (de mayor a menor)");
+    console.log("12. Salir");
    }
 
     function iniciarPila() {
     let opcion = 0;
   
-    while (opcion !== 7) {
+    while (opcion !== 12) {
       mostrarMenu();
-      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro,2.Quitar libro,3.Mostrar la pila,4. Listar libros,5. Libros mayores a $50,6. Resumen de libro con más páginas,8.ordenar por paginas,7. Salir "));
+      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro/,2.Quitar libro/,3.Mostrar la pila/,4. Listar libros/,5. Libros mayores a $50/,6. Resumen de libro con más páginas/,7.ordenar por paginas/,8.libros(precio mayor a 50)/,9.libros menos de 100 paginas/,10.precio mayor a 20 de menor a mayor/,11.libros ordenados por numeros de paginas(de mayor a menor)/,12. Salir "));
   
       switch (opcion) {
         case 1:
@@ -498,7 +566,19 @@ function ordenarPorPaginas() {
         case 7:
             ordenarPorPaginas();
           break;
-        case 8:
+          case 8:
+            librosCaro();
+            break;
+          case 9:
+            librosMenosPaginas();
+            break;
+          case 10:
+            librosCaro2();
+            break;
+          case 11:
+            resumenMasPaginas();
+            break;  
+        case 12:
             console.log("¡Hasta luego!");
           break;
           default:
