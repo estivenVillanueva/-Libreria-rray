@@ -538,7 +538,7 @@ function resumenMasPaginas() {
   
     while (opcion !== 12) {
       mostrarMenu();
-      opcion = parseInt(prompt("Ingrese una opción 1.agregar libro/,2.Quitar libro/,3.Mostrar la pila/,4. Listar libros/,5. Libros mayores a $50/,6. Resumen de libro con más páginas/,7.ordenar por paginas/,8.libros(precio mayor a 50)/,9.libros menos de 100 paginas/,10.precio mayor a 20 de menor a mayor/,11.libros ordenados por numeros de paginas(de mayor a menor)/,12. Salir "));
+      opcion = parseInt(prompt("Ingrese una opción\n 1.agregar libro\n2.Quitar libro\n3.Mostrar la pila\n4. Listar libros\n5. Libros mayores a $50\n6. Resumen de libro con más páginas\n7.ordenar por paginas\n8.libros(precio mayor a 50)\n9.libros menos de 100 paginas\n10.precio mayor a 20 de menor a mayor\n11.libros ordenados por numeros de paginas(de mayor a menor)\n12. Salir "));
   
       switch (opcion) {
         case 1:
