@@ -355,16 +355,17 @@ function agregarLibro(libro) {
   }
   function mostrarPila() {
     if (libros.length === 0) {
-      console.log("La pila está vacía.");
+      console.table("La pila está vacía.");
     } else {
-      console.log("Libros en la pila:");
+      console.table("Libros en la pila:");
       libros.forEach((libro, index) => {
-        console.log(`${index + 1}. ${libro.titulo}`);
+        console.table(`${index + 1}. ${libro.titulo} .${libro.autor}.${libro.descripcion}.${libro.genero}.${libro.numPaginas}.${libro.editorial}.
+        ${libro.dimensiones}.${libro.estado}.${libro.fecha_publicacion}.${libro.formato}.${libro.isbn}.${libro.idioma}.${libro.peso}.${libro.precio}.${libro.ubicacion}`);
       });
     }
   }
   
-  const librosListados = libros.map(libro => {
+  function librosListados(){ libros.map(libro => {
     return {
         Titulo: libro.titulo,
         Autor: libro.autor,
@@ -372,26 +373,93 @@ function agregarLibro(libro) {
         Precio: libro.precio
     };
 });
+}
 
-
-
-const iteracionesTitulos = libros.map(libro => {
+let interacion1 = libros.map(libro => {
   return {
       Titulo: libro.titulo,
-      Iteracion1: `${libro.titulo} (Edición especial)`,
-      Iteracion2: `${libro.titulo} (Edición de lujo)`,
-      Iteracion3: `${libro.titulo} (Edición anotada)`,
-      Iteracion4: `${libro.titulo} (Edición de bolsillo)`,
-      Iteracion5: `${libro.titulo} (Edición ilustrada)`,
-      Iteracion6: `${libro.titulo} (Edición conmemorativa)`,
-      Iteracion7: `${libro.titulo} (Edición revisada)`,
-      Iteracion8: `${libro.titulo} (Edición ampliada)`,
-      Iteracion9: `${libro.titulo} (Edición de coleccionista)`,
-      Iteracion10: `${libro.titulo} (Edición de autor)`
+      Autor: libro.autor,
+      Editorial: libro.editorial,
+     
   };
 });
 
-console.log(iteracionesTitulos);
+let interacion2= libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      numPaginas:libro.numPaginas,
+      peso:libro.peso
+  };
+});
+
+let interacion3= libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      dimensiones:libro.dimensiones,
+      idioma:libro.idioma,
+    
+  };
+});
+
+let interacion4= libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      Autor: libro.autor,
+      ubicacion:libro.ubicacion,
+  
+  };
+});
+
+let interacion5= libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      isbn:libro.isbn,
+      Editorial:libro.editorial,
+  };
+});
+
+let interacion6=libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      genero: libro.genero,
+      Editorial: libro.editorial,
+   
+  };
+});
+
+let interacion7= libros.map(libro => {
+  return {
+      Titulo: libro.titulo,
+      formato: libro.formato,
+      Editorial: libro.editorial,
+     
+  };
+});
+
+let interacion8= libros.map((libro) => {
+  return {
+      Titulo: libro.titulo,
+      fecha_publicacion: libro.fecha_publicacion,
+      Precio: libro.precio
+  };
+});
+
+let interacion9= libros.map((libro) => {
+  return {
+      Titulo: libro.titulo,
+      idioma:libro.idioma,
+      numPaginas:libro.numPaginas
+  };
+});
+
+let interacion10 = libros.map((libro) => {
+  return {
+      Titulo: libro.titulo,
+      estado:libro.estado,
+      formato:libro.formato,
+  };
+});
+
 
 const librosConDescuento = libros.map(libro => {
   const descuento = libro.precio.slice(1) * 0.2;
@@ -403,12 +471,12 @@ const librosConDescuento = libros.map(libro => {
   };
 });
 
-console.log(librosConDescuento);
+console.table(librosConDescuento);
 
 function listarLibros() {
-  console.log("Listado de libros:");
+  console.table("Listado de libros:");
   librosConDescuento.forEach(libro => {
-    console.log(`
+    console.table(`
       Título: ${libro.titulo}
       Autor: ${libro.autor}
       Editorial: ${libro.editorial}
@@ -425,9 +493,9 @@ function librosMayorA50() {
     return precio > 50;
   });
 
-  console.log("Libros con precio mayor a $50:");
+  console.table("Libros con precio mayor a $50:");
   librosMayores.forEach(libro => {
-    console.log(`- ${libro.titulo} (${libro.precio})`);
+    console.table(`- ${libro.titulo} (${libro.precio})`);
   });
 }
 
@@ -436,19 +504,19 @@ function resumenMasPaginas() {
     return libro.numPaginas > acumulador.numPaginas ? libro : acumulador;
   });
 
-  console.log("Resumen del libro con más páginas:");
-  console.log(`Título: ${libroMasPaginas.titulo}`);
-  console.log(`Autor: ${libroMasPaginas.autor}`);
-  console.log(`Editorial: ${libroMasPaginas.editorial}`);
-  console.log(`Páginas: ${libroMasPaginas.numPaginas}`);
+  console.table("Resumen del libro con más páginas:");
+  console.table(`Título: ${libroMasPaginas.titulo}`);
+  console.table(`Autor: ${libroMasPaginas.autor}`);
+  console.table(`Editorial: ${libroMasPaginas.editorial}`);
+  console.table(`Páginas: ${libroMasPaginas.numPaginas}`);
 }
 
 function ordenarPorPaginas() {
   const librosOrdenados = librosConDescuento.slice().sort((a, b) => b.numPaginas - a.numPaginas);
 
-  console.log("Libros ordenados por número de páginas (de mayor a menor):");
+  console.table("Libros ordenados por número de páginas (de mayor a menor):");
   librosOrdenados.forEach(libro => {
-    console.log(`- ${libro.titulo} (${libro.numPaginas} páginas)`);
+    console.table(`- ${libro.titulo} (${libro.numPaginas} páginas)`);
   });
 }
 
@@ -461,9 +529,9 @@ function librosCaro() {
       Precio: libro.precio
     }));
 
-  console.log("Resumen de libros caros (precio mayor a $50):");
+  console.table("Resumen de libros caros (precio mayor a $50):");
   librosCaro.forEach(libro => {
-    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
+    console.table(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
   });
 }
 
@@ -477,9 +545,9 @@ function librosMenosPaginas() {
       Paginas: libro.numPaginas
     }));
 
-  console.log("Resumen de libros con menos de 100 páginas:");
+  console.table("Resumen de libros con menos de 100 páginas:");
   librosMenosPaginas.forEach(libro => {
-    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Editorial: ${libro.Editorial}, Páginas: ${libro.Paginas}`);
+    console.table(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Editorial: ${libro.Editorial}, Páginas: ${libro.Paginas}`);
   });
 }
 
@@ -493,9 +561,9 @@ function librosCaro2() {
       Precio: libro.precio
     }));
 
-  console.log("Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio:");
+  console.table("Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio:");
   librosCaro2.forEach(libro => {
-    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
+    console.table(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
   });
 }
 
@@ -510,35 +578,113 @@ function resumenMasPaginas() {
       Paginas: libro.numPaginas
     }));
 
-  console.log("Resumen de libros ordenados por número de páginas (de mayor a menor):");
+  console.table("Resumen de libros ordenados por número de páginas (de mayor a menor):");
   librosMasPaginas.forEach(libro => {
-    console.log(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Editorial: ${libro.Editorial}, Páginas: ${libro.Paginas}`);
+    console.table(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Editorial: ${libro.Editorial}, Páginas: ${libro.Paginas}`);
   });
 }
+ function buscarLibros(){
+ algunlibro =libros.find((libro) => {
+  return libro.titulo === "El Viejo y el Mar";
+});
+console.table(algunlibro);
 
+ algunlibro =libros.find((libro) => {
+  return libro.autor === "Umberto Eco";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.fecha_publicacion ===1954-1955;
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.genero ==="Fantasía";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.idioma ==="español";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.dimensiones ==="5.08 x 1.02 x 7.8 pulgadas";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.peso ===756+"gr";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.numPaginas ===190;
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.isbn ===98676546543;
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.formato ==="pasta dura";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.editorial ==="Harcourt, Brace and Company";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.estado ==="Nuevo";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.descripcion ==="La obra maestra de Gabriel García Márquez narra la historia de la familia Buendía a lo largo de siete generaciones en el pueblo ficticio de Macondo";
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.precio ==="$"+100;
+});
+console.table(algunlibro);
+
+algunlibro =libros.find((libro) => {
+  return libro.ubicacion ==="Disponible en varias librerías y plataformas online";
+});
+console.table(algunlibro);
+ }
 
     function mostrarMenu() {
     console.log("/nMenú de la pila de libros:");
     console.log("1. Agregar un libro");
     console.log("2. Quitar un libro");
     console.log("3. Mostrar la pila");
-    console.log("4. Listar libros");
-    console.log("5. Libros mayores a $50");
-    console.log("6. Resumen de libro con más páginas");
-    console.log("7. Ordenar libros por número de páginas");
-    console.log("8. Resumen de libros caros (precio mayor a $50)");
-    console.log("9. Resumen de libros con menos de 100 páginas");
-    console.log("10. Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio");
-    console.log("11. Resumen de libros ordenados por número de páginas (de mayor a menor)");
-    console.log("12. Salir");
+    console.log("4.listado libros")
+    console.log("5.interaciones");
+    console.log("6. Listar libros");
+    console.log("7. Libros mayores a $50");
+    console.log("8. Resumen de libro con más páginas");
+    console.log("9. Ordenar libros por número de páginas");
+    console.log("10. Resumen de libros caros (precio mayor a $50)");
+    console.log("11. Resumen de libros con menos de 100 páginas");
+    console.log("12. Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio");
+    console.log("13. Resumen de libros ordenados por número de páginas (de mayor a menor)");
+    console.log("14.buscar libro")
+    console.log("15. Salir");
    }
 
     function iniciarPila() {
     let opcion = 0;
   
-    while (opcion !== 12) {
+    while (opcion !== 15) {
       mostrarMenu();
-      opcion = parseInt(prompt("Ingrese una opción\n 1.agregar libro\n2.Quitar libro\n3.Mostrar la pila\n4. Listar libros\n5. Libros mayores a $50\n6. Resumen de libro con más páginas\n7.ordenar por paginas\n8.libros(precio mayor a 50)\n9.libros menos de 100 paginas\n10.precio mayor a 20 de menor a mayor\n11.libros ordenados por numeros de paginas(de mayor a menor)\n12. Salir "));
+      opcion = parseInt(prompt("Ingrese una opción\n 1.agregar libro\n2.Quitar libro\n3.Mostrar la pila\n4.Listado libros\n5.interaciones\n6. Listar libros\n7. Libros mayores a $50\n8. Resumen de libro con más páginas\n9.ordenar por paginas\n10.libros(precio mayor a 50)\n11.libros menos de 100 paginas\n12.precio mayor a 20 de menor a mayor\n13.libros ordenados por numeros de paginas(de mayor a menor)\n14.buscar libro\n15. Salir "));
   
       switch (opcion) {
         case 1:
@@ -546,40 +692,58 @@ function resumenMasPaginas() {
             titulo: prompt("ingrese el titulo del libro"),
 
           };
-        agregarLibro(nuevoLibro);
+          agregarLibro(nuevoLibro);
+            break;
+          case 2:
+            quitarLibro();
+            break;
+          case 3:
+            mostrarPila();
+            break;
+          case 4:
+              librosListados();
           break;
-        case 2:
-          quitarLibro();
+          case 5:
+            console.table(interacion1)
+            console.table(interacion2)
+            console.table(interacion3)
+            console.table(interacion4)
+            console.table(interacion5)
+            console.table(interacion6)
+            console.table(interacion7)
+            console.table(interacion8)
+            console.table(interacion9)
+            console.table(interacion10)
           break;
-        case 3:
-          mostrarPila();
+          case 6:
+              listarLibros();
           break;
-        case 4:
-            listarLibros();
-          break;
-        case 5:
-            librosMayorA50();
-          break;
-        case 6:
-            resumenMasPaginas();
-          break;
-        case 7:
-            ordenarPorPaginas();
+          case 7:
+              librosMayorA50();
           break;
           case 8:
-            librosCaro();
-            break;
-          case 9:
-            librosMenosPaginas();
-            break;
-          case 10:
-            librosCaro2();
-            break;
-          case 11:
             resumenMasPaginas();
-            break;  
-        case 12:
-            console.log("¡Hasta luego!");
+          break;
+          case 9:
+            ordenarPorPaginas();
+          break;
+          case 10:
+            librosCaro();
+          break;
+          case 11:
+            librosMenosPaginas();
+          break;
+          case 12:
+            librosCaro2();
+          break;
+          case 13:
+            resumenMasPaginas();
+          break; 
+          case 14:
+              buscarLibros();
+          break;
+          case 15:
+              console.log("¡Hasta luego!");
           break;
           default:
             console.log("Opción inválida. Intente nuevamente.");
