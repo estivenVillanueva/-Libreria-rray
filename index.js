@@ -462,31 +462,30 @@ let interacion10 = libros.map((libro) => {
 });
 
 
-const librosConDescuento = libros.map(libro => {
-  const descuento = libro.precio.slice(1) * 0.2;
-  const precioDescuento = libro.precio.slice(1) * 0.8; 
-  return {
-    ...libro,
-    descuento: `$${descuento.toFixed(2)}`,
-    precioDescuento: `$${precioDescuento.toFixed(2)}`
-  };
-});
+const librodescuento = libros.map((libro) =>{  
+  return{
+      ...libro,
+      descuento:20,
 
-console.table(librosConDescuento);
-
-function listarLibros() {
-  console.table("Listado de libros:");
-  librosConDescuento.forEach(libro => {
-    console.table(`
-      Título: ${libro.titulo}
-      Autor: ${libro.autor}
-      Editorial: ${libro.editorial}
-      Precio original: ${libro.precio}
-      Descuento: ${libro.descuento}
-      Precio con descuento: ${libro.precioDescuento}
-    `);
-  });
+};
 }
+);
+
+
+
+
+function listardescuento () { 
+
+console.log(" libros disponibles:");
+librodescuento.forEach((libro, index) => {
+console.log(`${index + 1}: el titulo es: ${libro.titulo}\n autor: ${libro.autor} \n genero: ${libro.genero} \n idioma: ${libro.idioma} \n descuento: ${libro.descuento}`);
+})
+
+} 
+
+console.table(listardescuento());
+
+
 
 function librosMayorA50() {
   const librosMayores = librosConDescuento.filter(libro => {
@@ -717,7 +716,7 @@ console.table(algunlibro);
             console.table(interacion10)
           break;
           case 6:
-              listarLibros();
+            listardescuento();
           break;
           case 7:
               librosMayorA50();
