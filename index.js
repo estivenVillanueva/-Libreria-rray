@@ -646,7 +646,7 @@ console.table(algunlibro);
     console.log("7. Libros mayores a $50");
     console.log("8. Resumen de libro con más páginas");
     console.log("9. Ordenar libros por número de páginas");
-    console.log("10. Resumen de libros caros (precio mayor a $50)");
+    console.log("10. Resumen de libros caros (precio mayor a $20)");
     console.log("11. Resumen de libros con menos de 100 páginas");
     console.log("12. Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio");
     console.log("13. Resumen de libros ordenados por número de páginas (de mayor a menor)");
