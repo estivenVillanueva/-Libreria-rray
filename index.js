@@ -481,38 +481,20 @@ librodescuento.forEach((libro, index) => {
 console.log(`${index + 1}: el titulo es: ${libro.titulo}\n autor: ${libro.autor} \n genero: ${libro.genero} \n idioma: ${libro.idioma} \n descuento: ${libro.descuento}`);
 })
 
+
 } 
 
-console.table(listardescuento());
 
 
-
-function librosMayorA50() {
-  const librosMayores = librosConDescuento.filter(libro => {
-    const precio = parseFloat(libro.precio.slice(1));
-    return precio > 50;
-  });
-
-  console.table("Libros con precio mayor a $50:");
-  librosMayores.forEach(libro => {
-    console.table(`- ${libro.titulo} (${libro.precio})`);
-  });
-}
 
 function resumenMasPaginas() {
-  const libroMasPaginas = librosConDescuento.reduce((acumulador, libro) => {
+  const libroMasPaginas = libros.reduce((acumulador, libro) => {
     return libro.numPaginas > acumulador.numPaginas ? libro : acumulador;
-  });
-
-  console.table("Resumen del libro con más páginas:");
-  console.table(`Título: ${libroMasPaginas.titulo}`);
-  console.table(`Autor: ${libroMasPaginas.autor}`);
-  console.table(`Editorial: ${libroMasPaginas.editorial}`);
-  console.table(`Páginas: ${libroMasPaginas.numPaginas}`);
+  })
 }
 
 function ordenarPorPaginas() {
-  const librosOrdenados = librosConDescuento.slice().sort((a, b) => b.numPaginas - a.numPaginas);
+  const librosOrdenados = libros.slice().sort((a, b) => b.numPaginas - a.numPaginas);
 
   console.table("Libros ordenados por número de páginas (de mayor a menor):");
   librosOrdenados.forEach(libro => {
@@ -521,22 +503,19 @@ function ordenarPorPaginas() {
 }
 
 function librosCaro() {
-  const librosCaro = librosConDescuento
-    .filter(libro => parseFloat(libro.precio.slice(1)) > 50)
+  const librosCaro = libros.filter(libro => parseFloat(libro.precio.slice(1)) > 50)
     .map(libro => ({
       Titulo: libro.titulo,
       Autor: libro.autor,
-      Precio: libro.precio
+      Precio: libro.precio,
     }));
 
   console.table("Resumen de libros caros (precio mayor a $50):");
-  librosCaro.forEach(libro => {
-    console.table(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
-  });
+console.table(librosCaro)
 }
 
 function librosMenosPaginas() {
-  const librosMenosPaginas = librosConDescuento
+  const librosMenosPaginas = libros
     .filter(libro => libro.numPaginas < 100)
     .map(libro => ({
       Titulo: libro.titulo,
@@ -546,13 +525,11 @@ function librosMenosPaginas() {
     }));
 
   console.table("Resumen de libros con menos de 100 páginas:");
-  librosMenosPaginas.forEach(libro => {
-    console.table(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Editorial: ${libro.Editorial}, Páginas: ${libro.Paginas}`);
-  });
+console.table(librosMenosPaginas)
 }
 
 function librosCaro2() {
-  const librosCaro2 = librosConDescuento
+  const librosCaro2 = libros
     .filter(libro => parseFloat(libro.precio.slice(1)) > 20)
     .sort((a, b) => parseFloat(b.precio.slice(1)) - parseFloat(a.precio.slice(1)))
     .map(libro => ({
@@ -562,13 +539,11 @@ function librosCaro2() {
     }));
 
   console.table("Resumen de libros caros (precio mayor a $20) ordenados de mayor a menor precio:");
-  librosCaro2.forEach(libro => {
-    console.table(`- Título: ${libro.Titulo}, Autor: ${libro.Autor}, Precio: ${libro.Precio}`);
-  });
+  console.table(librosCaro2)
 }
 
 function resumenMasPaginas() {
-  const librosMasPaginas = librosConDescuento
+  const librosMasPaginas = libros
     .slice()
     .sort((a, b) => b.numPaginas - a.numPaginas)
     .map(libro => ({
@@ -684,7 +659,7 @@ console.table(algunlibro);
   
     while (opcion !== 15) {
       mostrarMenu();
-      opcion = parseInt(prompt("Ingrese una opción\n 1.agregar libro\n2.Quitar libro\n3.Mostrar la pila\n4.Listado libros\n5.interaciones\n6. Listar libros\n7. Libros mayores a $50\n8. Resumen de libro con más páginas\n9.ordenar por paginas\n10.libros(precio mayor a 50)\n11.libros menos de 100 paginas\n12.precio mayor a 20 de menor a mayor\n13.libros ordenados por numeros de paginas(de mayor a menor)\n14.buscar libro\n15. Salir "));
+      opcion = parseInt(prompt("Ingrese una opción\n 1.agregar libro\n2.Quitar libro\n3.Mostrar la pila\n4.Listado libros\n5.interaciones\n6. Listar libros\n7. Libros mayores a $50\n8. Resumen de libro con más páginas\n9.ordenar por paginas\n10.libros(precio mayor a 20)\n11.libros menos de 100 paginas\n12.precio mayor a 20 de menor a mayor\n13.libros ordenados por numeros de paginas(de mayor a menor)\n14.buscar libro\n15. Salir "));
   
       switch (opcion) {
         case 1:
@@ -719,7 +694,7 @@ console.table(algunlibro);
             listardescuento();
           break;
           case 7:
-              librosMayorA50();
+              librosCaro();
           break;
           case 8:
             resumenMasPaginas();
@@ -728,7 +703,7 @@ console.table(algunlibro);
             ordenarPorPaginas();
           break;
           case 10:
-            librosCaro();
+            librosCaro2();
           break;
           case 11:
             librosMenosPaginas();
