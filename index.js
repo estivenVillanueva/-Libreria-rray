@@ -365,15 +365,16 @@ function agregarLibro(libro) {
     }
   }
   
-  function librosListados(){ libros.map(libro => {
-    return {
-        Titulo: libro.titulo,
-        Autor: libro.autor,
-        Editorial: libro.editorial,
-        Precio: libro.precio
-    };
-});
-}
+  function listaLibros() {
+    libros.map(libro => {
+      console.log(`Título: ${libro.titulo}`);
+      console.log(`Autor: ${libro.autor}`);
+      console.log(`Editorial: ${libro.editorial}`);
+      console.log(`Precio: ${libro.precio}`);
+      console.log('-------------------');
+    });
+  }  
+
 
 let interacion1 = libros.map(libro => {
   return {
@@ -701,7 +702,7 @@ console.table(algunlibro);
             mostrarPila();
             break;
           case 4:
-              librosListados();
+            listaLibros()
           break;
           case 5:
             console.table(interacion1)
